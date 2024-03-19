@@ -1,15 +1,15 @@
 const express = require("express");
 const path = require("path");
 const TelegramBot = require("node-telegram-bot-api");
-const TOKEN = 7147043020:AAEKVZD8SxU7yHZmmjWd3csUZiAJTvheOhk;
+const TOKEN = "7085710486:AAEOAF4WvrZhEQRIn32mIRY_NhBdRd8NwHU";
 const server = express();
 const bot = new TelegramBot(TOKEN, {
     polling: true
 });
 const port = process.env.PORT || 5000;
-const gameName = "Короткое имя игры";
+const gameName = "FlappySigmaBird";
 const queries = {};
-server.use(express.static(path.join(__dirname, 'Название корневой папки бэкэнда')));
+server.use(express.static(path.join(__dirname, 'FlappySigmaBird Beta v0.0.1')));
 bot.onText(/help/, (msg) => bot.sendMessage(msg.from.id, "Say /game if you want to play."));
 bot.onText(/start|game/, (msg) => bot.sendGame(msg.from.id, gameName));
 bot.on("callback_query", function (query) {
@@ -17,7 +17,7 @@ bot.on("callback_query", function (query) {
         bot.answerCallbackQuery(query.id, "Sorry, '" + query.game_short_name + "' is not available.");
     } else {
         queries[query.id] = query;
-        let gameurl = "Ссылка на игру в гитхабе";
+        let gameurl = "https://valkorionsidulov.github.io/FlappyBirdGame/";
         bot.answerCallbackQuery({
             callback_query_id: query.id,
             url: gameurl
